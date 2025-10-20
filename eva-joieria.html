@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Eva Joieria Disseny — Joyería y Relojería</title>
+  <meta name="description" content="Eva Joieria Disseny — Boutique de joyería y relojería en Sant Feliu de Llobregat y Molins de Rei. Piezas únicas, marcas de prestigio, taller y atención personalizada." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #fbf9f6;
+      --card: #ffffff;
+      --accent: #c9a97a; /* beige-dorado suave */
+      --accent-2: #bfc6ca; /* plata suave */
+      --text: #1f1f1f;
+      --muted:#6e6e6e;
+      --glass: rgba(255,255,255,0.85);
+      --radius:14px;
+      --container:1150px;
+      --ease: cubic-bezier(.2,.9,.3,1);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: 'Poppins', sans-serif;
+      -webkit-font-smoothing:antialiased;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    /* ---------- Topbar / Nav ---------- */
+    .topbar{
+      position:fixed;top:0;left:0;right:0;
+      background:var(--glass);
+      backdrop-filter: blur(6px);
+      border-bottom:1px solid rgba(0,0,0,0.06);
+      z-index:9999;
+    }
+    .nav{
+      max-width:var(--container);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;padding:12px 20px;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:54px;height:54px;border-radius:12px;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,#fff,#f3f3f3);
+      border:1px solid rgba(0,0,0,0.04);
+      color:var(--accent-2); font-weight:700;
+      box-shadow:0 8px 26px rgba(11,11,11,0.04);
+      font-size:15px;
+    }
+    .brand .name{font-weight:700;color:var(--accent-2);letter-spacing:0.6px;font-size:14px}
+    nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0;align-items:center}
+    nav a{ text-decoration:none;color:var(--text);font-weight:600;padding:8px 12px;border-radius:8px}
+    nav a:hover{color:var(--accent);background:rgba(201,169,122,0.06)}
+    .nav-actions{display:flex;gap:10px;align-items:center}
+
+    .menu-btn{display:none;background:transparent;border:1px solid rgba(0,0,0,0.06);padding:8px;border-radius:8px;cursor:pointer}
+
+    /* ---------- HERO (fondo completo) ---------- */
+    .hero-section{
+      position:relative;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:white;
+      overflow:hidden;
+      background: url('hero.jpg') no-repeat center center/cover;
+    }
+    /* dark overlay + subtle blur for legibility */
+    .hero-section::before{
+      content:"";
+      position:absolute;inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.45));
+      backdrop-filter: blur(2px);
+      z-index:1;
+    }
+    .hero-content{
+      position:relative;z-index:2;
+      max-width:900px;padding:28px;border-radius:12px;
+      transform:translateY(18px);
+      opacity:0;
+      transition: all 700ms var(--ease);
+    }
+    .hero-content.inview{transform:none;opacity:1}
+    .hero-content h1{margin:0;font-size:40px;color:var(--accent-2);line-height:1.02;text-shadow:0 6px 20px rgba(0,0,0,0.25)}
+    .hero-content p{color:rgba(255,255,255,0.93);margin-top:12px;font-size:18px}
+    .hero-buttons{margin-top:18px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{
+      background:var(--accent);color:#fff;padding:10px 16px;border-radius:28px;text-decoration:none;font-weight:700;box-shadow:0 10px 34px rgba(201,169,122,0.14);
+      transition: transform 220ms var(--ease);
+    }
+    .btn:hover{transform:translateY(-4px)}
+    .btn.light{background:transparent;border:2px solid rgba(255,255,255,0.9);color:#fff}
+
+    .hero-info{margin-top:16px;color:rgba(255,255,255,0.85);font-size:14px}
+    .hero-small{display:flex;gap:18px;justify-content:center;margin-top:8px;color:rgba(255,255,255,0.85);font-size:13px}
+
+    /* ---------- Main content ---------- */
+    main{max-width:var(--container);margin:28px auto;padding:0 20px}
+    section.block{background:transparent;padding:36px 0}
+    .card{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(0,0,0,0.03);box-shadow:0 10px 30px rgba(11,11,11,0.03)}
+    h2{color:var(--accent);margin-bottom:12px;text-align:center}
+    p.lead{color:var(--muted);max-width:820px;margin:0 auto;text-align:center}
+
+    /* ABOUT */
+    .about-grid{display:grid;grid-template-columns:1fr 420px;gap:26px;align-items:start}
+    .about-photo img{width:100%;height:100%;object-fit:cover;border-radius:12px;border:1px solid rgba(0,0,0,0.04)}
+
+    /* SERVICES */
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
+    .service{padding:18px;border-radius:12px;background:var(--card);border:1px solid rgba(0,0,0,0.03);box-shadow:0 6px 18px rgba(11,11,11,0.03)}
+    .service h3{margin:0;color:var(--accent-2)}
+
+    /* BRANDS */
+    .brands{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center;padding-top:10px}
+    .brand-logo{width:130px;height:60px;border-radius:8px;background:var(--card);display:flex;align-items:center;justify-content:center;padding:8px;border:1px solid rgba(0,0,0,0.04)}
+    .brands p{width:100%;text-align:center;color:var(--muted);margin-top:8px}
+
+    /* GALLERY */
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
+    .gallery img{width:100%;height:220px;object-fit:cover;border-radius:12px;border:1px solid rgba(0,0,0,0.04);cursor:pointer;transition:transform .25s var(--ease)}
+    .gallery img:hover{transform:translateY(-6px)}
+
+    /* STORES */
+    .stores{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .store{background:linear-gradient(180deg,#fff,#fff);padding:16px;border-radius:12px;border:1px solid rgba(0,0,0,0.03)}
+    .store img{width:100%;height:200px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,0.04)}
+    .map{width:100%;height:220px;border-radius:8px;border:1px solid rgba(0,0,0,0.04);margin-top:10px}
+
+    /* REVIEWS */
+    .reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px}
+    .review{background:var(--card);padding:16px;border-radius:12px;border:1px solid rgba(0,0,0,0.03);box-shadow:0 8px 22px rgba(11,11,11,0.03)}
+    .review .meta{display:flex;align-items:center;gap:10px}
+    .avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#f6f6f6,#fff);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent-2);border:1px solid rgba(0,0,0,0.04)}
+    .review h4{margin:8px 0 4px;font-size:15px}
+    .stars{color:#f5c66d;font-size:14px}
+    .time{color:var(--muted);font-size:13px;margin-left:auto}
+    .review p{color:var(--muted);margin-top:10px;font-size:14px}
+
+    /* CONTACT */
+    .contact-grid{display:grid;grid-template-columns:1fr 420px;gap:22px}
+    form input, form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);margin-top:8px;font-size:14px;background:transparent;color:var(--text)}
+    form textarea{min-height:120px;resize:vertical}
+
+    /* FOOTER */
+    footer.sitefoot{margin-top:40px;padding:40px 20px;text-align:center;color:var(--muted);border-top:1px solid rgba(0,0,0,0.04)}
+
+    /* RESPONSIVE */
+    @media (max-width:980px){
+      .about-grid,.contact-grid,.hero-section{grid-template-columns:1fr}
+      .stores{grid-template-columns:1fr}
+      nav ul{display:none}
+      .menu-btn{display:inline-block}
+      .brand .name{display:none}
+    }
+    @media (max-width:600px){
+      .hero-content h1{font-size:26px;padding:0 8px}
+      .logo{width:44px;height:44px;font-size:13px}
+    }
+
+    /* ---------- Reveal on scroll animation (subir el texto) ---------- */
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease), transform .6s var(--ease)}
+    .reveal.inview{opacity:1;transform:translateY(0)}
+    .hero-content.reveal{transition-duration:900ms}
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <div class="topbar" role="banner">
+    <div class="nav">
+      <div class="brand">
+        <div class="logo">EVA</div>
+        <div class="name">
+          <div style="font-weight:700;color:var(--accent-2);">Eva Joieria Disseny</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">Joyería · Relojería · Diseño</div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:14px">
+        <nav aria-label="Menú principal">
+          <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#marcas">Marcas</a></li>
+            <li><a href="#proyectos">Galería</a></li>
+            <li><a href="#tiendas">Tiendas</a></li>
+            <li><a href="#opiniones">Opiniones</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="menu-btn" id="menuBtn" aria-label="Mostrar menú">☰</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO (fondo: hero.jpg) -->
+  <section id="inicio" class="hero-section">
+    <div class="hero-content reveal" aria-hidden="false">
+      <h1>Elegancia que ilumina cada momento</h1>
+      <p>Piezas seleccionadas con mimo, diseño artesanal y marcas de prestigio. Visítanos en Sant Feliu de Llobregat y Molins de Rei.</p>
+
+      <div class="hero-buttons" style="margin-top:18px">
+        <a class="btn" href="#marcas">Ver colecciones</a>
+        <a class="btn light" href="#tiendas">Nuestras tiendas</a>
+      </div>
+
+      <div class="hero-small" style="margin-top:18px">
+        <div>Horario: Lun–Vie 10:00–13:30 · 17:00–20:00 · Sáb 10:00–14:00</div>
+        <div>Tel: <a href="tel:+34936326022" style="color:inherit;text-decoration:underline">93 632 60 22</a></div>
+      </div>
+    </div>
+  </section>
+
+  <main role="main">
+
+    <!-- SOBRE -->
+    <section id="sobre" class="block">
+      <h2 class="reveal">Sobre nosotros</h2>
+      <p class="lead reveal">Boutique familiar ubicada en Barcelona, especializada en joyería y relojería. Combinamos tradición, técnica y diseño para ofrecer piezas que acompañan los momentos importantes.</p>
+
+      <div class="about-grid" style="margin-top:18px">
+        <div class="card reveal">
+          <h3 style="color:var(--accent-2)">Historia</h3>
+          <p>Eva Joieria Disseny nace del amor por la joyería y el trato personalizado. Desde nuestros inicios en Sant Feliu hemos cuidado la selección de marcas y creadores para ofrecer variedad, calidad y propuestas únicas.</p>
+
+          <h3 style="margin-top:14px;color:var(--accent-2)">Misión & valores</h3>
+          <p>Nuestra misión es ofrecer una experiencia cálida, profesional y transparente: asesoramiento experto, piezas con identidad y un taller propio para garantizar el servicio post-venta.</p>
+
+          <h3 style="margin-top:14px;color:var(--accent-2)">Equipo</h3>
+          <p>Equipo pequeño y profesional: asesores de producto, gemólogos y relojeros con formación técnica y sensibilidad por el diseño.</p>
+        </div>
+
+        <div class="about-photo card reveal">
+          <img src="interior.jpg" alt="Interior de la tienda Eva Joieria">
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="block">
+      <h2 class="reveal">Servicios</h2>
+      <p class="lead reveal">Servicios pensados para una experiencia completa: desde la compra hasta el mantenimiento y personalización de tus piezas.</p>
+
+      <div class="services-grid" style="margin-top:18px">
+        <div class="service card reveal">
+          <h3>Asesoramiento personalizado</h3>
+          <p>Ayudamos a elegir la pieza perfecta según ocasión, estilo y presupuesto. Atención discreta y profesional.</p>
+        </div>
+
+        <div class="service card reveal">
+          <h3>Taller y reparación</h3>
+          <p>Servicio técnico propio para arreglos, ajustes, limpieza y revisión de relojes y joyas.</p>
+        </div>
+
+        <div class="service card reveal">
+          <h3>Encargos a medida</h3>
+          <p>Diseño y fabricación de piezas personalizadas: nos adaptamos a tu idea y la convertimos en joya.</p>
+        </div>
+
+        <div class="service card reveal">
+          <h3>Envoltorio premium & grabados</h3>
+          <p>Presentación cuidada y opciones de grabado para regalos memorables.</p>
+        </div>
+      </div>
+    </section>
+
+        <!-- MARCAS -->
+    <section id="marcas" class="block">
+      <h2 class="reveal">Marcas</h2>
+      <p class="lead reveal">Firmas internacionales y creadores locales. Selección que equilibra lujo, diseño y propuestas accesibles.</p>
+
+      <div class="card center reveal" style="padding:22px;margin-top:18px">
+        <div class="brands" aria-hidden="true">
+          <div class="brand-logo"><img src="logo_chaumet.png" alt="Chaumet" style="max-width:100%;max-height:44px"></div>
+          <div class="brand-logo"><img src="logo_hermes.png" alt="Hermès" style="max-width:100%;max-height:44px"></div>
+          <div class="brand-logo"><img src="logo_tous.png" alt="Tous" style="max-width:100%;max-height:44px"></div>
+          <div class="brand-logo"><img src="logo_armani.png" alt="Armani" style="max-width:100%;max-height:44px"></div>
+          <div class="brand-logo"><img src="logo_michaelkors.png" alt="Michael Kors" style="max-width:100%;max-height:44px"></div>
+          <div class="brand-logo"><img src="logo_pandora.png" alt="Pandora" style="max-width:100%;max-height:44px"></div>
+        </div>
+
+        <p style="max-width:900px;margin-top:12px;color:var(--muted)">
+          Relojería destacada y joyería de autor: Chaumet · Hermès · Tous · Armani · Michael Kors · Pandora · Plata de Palo · Marina García · Miguel Sardà
+        </p>
+
+        <div class="reveal" style="display:flex;justify-content:center;margin-top:18px">
+          <img src="joyas.jpg" alt="Detalle joyas" style="width:100%;max-width:820px;max-height:340px;object-fit:cover;border-radius:14px;border:1px solid rgba(0,0,0,0.05);box-shadow:0 10px 28px rgba(0,0,0,0.08)">
+        </div>
+      </div>
+    </section>
+
+
+    <!-- TIENDAS -->
+    <section id="tiendas" class="block">
+      <h2 class="reveal">Tiendas</h2>
+      <p class="lead reveal">Dos espacios donde atenderte con la misma cercanía y calidad.</p>
+
+      <div class="stores" style="margin-top:18px">
+        <div class="store card reveal">
+          <h3>Sant Feliu de Llobregat</h3>
+          <p class="muted"><strong>Dirección:</strong> Pou Sant Pere, 6 · 08980 Sant Feliu de Llobregat</p>
+          <img src="santfeliu.jpg" alt="Tienda Sant Feliu">
+          <iframe class="map" src="https://www.google.com/maps?q=Pou+Sant+Pere,+6,+Sant+Feliu+de+Llobregat,+Barcelona&output=embed" loading="lazy"></iframe>
+        </div>
+
+        <div class="store card reveal">
+          <h3>Molins de Rei — EVA Disseny</h3>
+          <p class="muted"><strong>Dirección:</strong> Carrer Major / Calle Mayor, 10 · 08750 Molins de Rei</p>
+          <img src="molins.jpg" alt="Tienda Molins de Rei">
+          <iframe class="map" src="https://www.google.com/maps?q=Carrer+Major,+10,+Molins+de+Rei,+Barcelona&output=embed" loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- OPINIONES -->
+    <section id="opiniones" class="block">
+      <h2 class="reveal">Opiniones de nuestros clientes</h2>
+      <p class="lead reveal">Reseñas reales recogidas en Google. Valoraciones sinceras que muestran experiencias diversas.</p>
+
+      <div class="reviews-grid">
+        <!-- Reseñas completas -->
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">TG</div><div><strong>Totiden Guitart</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">4/5 · hace 4 años</div></div>
+          <p class="stars">⭐⭐⭐⭐☆</p>
+          <h4>Molt atentes!!</h4>
+          <p>Son encantadores</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">JC</div><div><strong>Jordi Capdevila Ejarque</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 3 años</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>Molt bona compra</h4><p></p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">ET</div><div><strong>Esther Tudela</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">1/5 · hace 9 meses</div></div>
+          <p class="stars">⭐☆☆☆☆</p>
+          <h4>Encargué unos pendientes de Pandora</h4>
+          <p>Encargué unos pendientes de Pandora para navidad unas semanas antes, incluso llamé dos veces más porque se acercaba la fecha y no me llamaban. Pues a dos días…Més</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">NC</div><div><strong>Noe CarCor</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 2 años</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>Siempre geniales!</h4>
+          <p>El trato, la atención, la calidad... Todo en general.,pero sobretodo el trato familiar y cariñoso. Siempre compramos allí desde hace muchos años y muy contenta. Gracias por todo.</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">DM</div><div><strong>David Martinez</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">1/5 · hace 1 año</div></div>
+          <p class="stars">⭐☆☆☆☆</p>
+          <h4>Problemas con calidad y trato</h4>
+          <p>Los productos de muy mala calidad, revisar con cuidado que os están vendiendo porque pueden decir que está hecho de un material determinado y no tiene nada que ver con lo que es, encima muy mal trato al cliente, y no sé entera de nada, un desastre...</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">MV</div><div><strong>Marc Vidal</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 3 años</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>Excelente trato</h4>
+          <p>De las mejores joyerías en las que mejor trato he recibido por parte del personal de la tienda, no te juzgan por las apariencias ni por cómo vas vestido ya…Més</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">JC</div><div><strong>Jenny Casas</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">1/5 · hace 3 años</div></div>
+          <p class="stars">⭐☆☆☆☆</p>
+          <h4>Problema con arreglo</h4>
+          <p>Mi pareja compró un anillo y tuve que acercarme a arreglarlo, ya que me quedaba grande. Lo llevé el día 02/11 y ayer día, 18/11 llamé porque habían pasado…Més</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">AR</div><div><strong>Anna Roque Marquez</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 3 años</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>Recomendada</h4>
+          <p>Una joyería increíble, el personal inmejorable Anna y Eva son encantadoras. 0 problemas, rapidez, eficacia y muy familiar. Volveré una y mil veces. Aparte buen…Més</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">AM</div><div><strong>Alfred Marmolita</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">4/5 · hace 1 año</div></div>
+          <p class="stars">⭐⭐⭐⭐☆</p>
+          <h4>Buen surtido</h4>
+          <p>Muy buenos artículos en general y siempre excepcional trato por el personal.</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">AR2</div><div><strong>Alberto Ricart</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 3 años</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>Entrega rápida</h4>
+          <p>Les pedí un reloj de un día para otro y lo trajeron en menos de 24h y sin ningún compromiso. Lo compré sin dudarlo. Muy atentos y a un precio muy correcto.</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">ND</div><div><strong>Nicolas Diaz</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 5 años</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>Atención excelente</h4>
+          <p>Atención excelente y gran variedad de artículos, entre los que encontré lo que iba buscando. Muy buena relación precio-calidad.</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">ER</div><div><strong>Elena Rodriguez</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 1 año</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>Amables y gran variedad</h4>
+          <p>Son muy amables, hay muchas cosas y precios variados.</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">MG</div><div><strong>M.A. Garcia P.</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 1 año</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>La mejor</h4>
+          <p>Es lo mejor tienda del mundo. no cambiaría por nada</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">LB</div><div><strong>Lourdes Baron</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 6 años</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>Diseños geniales</h4>
+          <p>El trato es excelente, los diseños geniales. Creo que no se explica, se vive.. Gracias a todas las chicas. 🤩</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">SP</div><div><strong>Sandra Prieto Garcia</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">4/5 · hace 3 años</div></div>
+          <p class="stars">⭐⭐⭐⭐☆</p>
+          <h4>Profesionales</h4>
+          <p>Muy atentos,buenos profesionales.Surtido para tdos los bolsillos.</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">IT</div><div><strong>Iñigo Teixidó</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 1 año</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>Diseños únicos</h4>
+          <p>Joyas con diseños únicos, siempre encuentras lo que buscas y personas muy amables y atentas, yo siempre vuelvo, gracias.</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">MM</div><div><strong>Miriam Mendez</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 2 años</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>Buen trato</h4>
+          <p>Buen trato y joyas muy finas. Me gusta</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">GR</div><div><strong>Guillermo Rodríguez</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 6 años</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>Atención excelente</h4>
+          <p>De las mejores joyerias de Sant Feliu de llobregat, la atención recibida siempre es muy buena,encantados de ir cuando hay que comprar algo especial.</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">NJ</div><div><strong>Noelia Jimenez Devesa</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 4 años</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>Recomendable</h4>
+          <p>La mejor joyería de sant feliu,género exquisito y de gran variedad y un trato muy amable...lo recomiendo totalmente</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">MA</div><div><strong>Marjurie Artigas</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 3 años</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>Excelente atención</h4>
+          <p>Excelentísima atención. Estoy muy agradecida.</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">MB</div><div><strong>Monica Barette</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 3 años</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>Servicio personalizado</h4>
+          <p>Una joyería que le recomiendo a cualquier persona con los hijos cerrados, trato personalizado y si no tienen lo que buscas lo puedes mandar hacer o te lo ponen a tu gusto.</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">CB</div><div><strong>Charo Borrego Gil</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 4 años</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>Atentas y variadas</h4>
+          <p>Muy bien son super atentas tienen mucha variedad.</p>
+        </div>
+
+        <div class="review card reveal">
+          <div class="meta"><div class="avatar">LA</div><div><strong>Leonora Arcos</strong><div class="small muted">Reseña de: Google</div></div><div class="time small muted">5/5 · hace 1 año</div></div>
+          <p class="stars">⭐⭐⭐⭐⭐</p>
+          <h4>Todo precioso</h4>
+          <p>Todo precioso 💖</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="block">
+      <h2 class="reveal">Contacto</h2>
+      <p class="lead reveal">¿Tienes una consulta o quieres encargar una pieza? Escríbenos o visítanos en cualquiera de nuestras tiendas.</p>
+
+      <div class="contact-grid" style="margin-top:18px">
+        <div class="card reveal">
+          <h3>Información</h3>
+          <p><strong>Teléfono:</strong> <a href="tel:+34936326022">93 632 60 22</a></p>
+          <p><strong>Email:</strong> <a href="mailto:info@evajoieria.com">info@evajoieria.com</a></p>
+          <p><strong>Sant Feliu:</strong> Pou Sant Pere, 6 · 08980 · Sant Feliu de Llobregat</p>
+          <p><strong>Molins:</strong> Calle Mayor, 10 · 08750 · Molins de Rei</p>
+          <p><strong>Horario:</strong> Lun–Vie 10:00–13:30 · 17:00–20:00 · Sáb 10:00–14:00</p>
+
+          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+            <a class="btn" href="https://wa.me/34936326022" target="_blank" rel="noopener">Contactar por WhatsApp</a>
+            <a class="btn light" href="#tiendas">Ver en mapa</a>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <h3>Escríbenos</h3>
+          <form action="https://formspree.io/f/mkgqedjo" method="POST">
+  <label for="name">Nombre</label>
+  <input id="name" name="name" placeholder="Tu nombre" required>
+
+  <label for="email">Email</label>
+  <input id="email" name="_replyto" type="email" placeholder="tu@email.com" required>
+
+  <label for="msg">Mensaje</label>
+  <textarea id="msg" name="message" placeholder="Cuéntanos qué necesitas"></textarea>
+
+  <div style="margin-top:12px;display:flex;gap:10px">
+    <button type="submit" class="btn">Enviar</button>
+    <button type="reset" class="btn light">Limpiar</button>
+  </div>
+</form>
+
+        </div>
+      </div>
+
+      <div style="margin-top:18px" class="reveal">
+        <img src="contacto.jpg" alt="Mostrador y atención al cliente - Eva Joieria" style="width:100%;border-radius:12px;border:1px solid rgba(0,0,0,0.04)">
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="sitefoot">
+    <div style="max-width:var(--container);margin:0 auto;padding:0 20px">
+      <div style="display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:700;color:var(--accent-2)">Eva Joieria Disseny</div>
+          <div class="small muted" style="margin-top:6px">Pou Sant Pere, 6 · 08980 Sant Feliu de Llobregat · Calle Mayor, 10 · 08750 Molins de Rei</div>
+        </div>
+
+        <div class="small muted">© 2025 Eva Joieria Disseny · Todos los derechos reservados</div>
+
+        <div style="display:flex;gap:10px;align-items:center">
+          <a href="#" aria-label="Instagram" title="Instagram" style="text-decoration:none;color:var(--accent-2)">📸</a>
+          <a href="#" aria-label="Facebook" title="Facebook" style="text-decoration:none;color:var(--accent-2)">📘</a>
+          <a href="#" aria-label="LinkedIn" title="LinkedIn" style="text-decoration:none;color:var(--accent-2)">🔗</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);align-items:center;justify-content:center;z-index:99999;padding:24px">
+    <img id="lightboxImg" src="" alt="ampliada" style="max-width:100%;max-height:90vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.6)">
+    <button onclick="closeLightbox()" aria-label="Cerrar" style="position:fixed;top:20px;right:20px;background:#fff;border-radius:8px;padding:8px 12px;border:none;cursor:pointer">Cerrar ✕</button>
+  </div>
+
+  <script>
+    // Smooth scroll for anchor links (offset for fixed topbar)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const href = a.getAttribute('href');
+        if(href.startsWith('#')){
+          e.preventDefault();
+          const el = document.querySelector(href);
+          if(el) window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 76, behavior:'smooth'});
+        }
+      });
+    });
+
+    // IntersectionObserver for reveal on scroll (subir el texto)
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('inview');
+          // Once shown, unobserve to avoid repeated triggers
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.12});
+    revealEls.forEach(el=>io.observe(el));
+
+    // Ensure hero content appears on load even if in view
+    window.addEventListener('load', ()=> {
+      document.querySelectorAll('.hero-content').forEach(h=>{
+        setTimeout(()=>h.classList.add('inview'), 220);
+      });
+    });
+
+    // Lightbox functions
+    function openLightbox(src){
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lightboxImg');
+      img.src = src;
+      lb.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(){
+      const lb = document.getElementById('lightbox');
+      lb.style.display = 'none';
+      document.getElementById('lightboxImg').src = '';
+      document.body.style.overflow = '';
+    }
+    document.getElementById('lightbox')?.addEventListener('click',(e)=>{ if(e.target.id==='lightbox') closeLightbox(); });
+
+    // Responsive menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    menuBtn?.addEventListener('click', ()=>{
+      const nav = document.querySelector('.nav ul');
+      if(!nav) return;
+      nav.style.display = (nav.style.display === 'flex') ? 'none' : 'flex';
+      nav.style.flexDirection = 'column';
+      nav.style.gap = '10px';
+      nav.style.background = 'var(--glass)';
+      nav.style.padding = '10px';
+      nav.style.borderRadius = '10px';
+      nav.style.position = 'absolute';
+      nav.style.top = '68px';
+      nav.style.right = '20px';
+      nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.08)';
+    });
+
+    // Simulated contact form
+    function handleFormSubmit(){
+      const name = document.getElementById('name').value || 'Amigo';
+      alert('Gracias, ' + name + '. Tu mensaje se ha enviado (simulado). En producción se conectaría a un servicio de correo).');
+      document.getElementById('contactForm').reset();
+    }
+  </script>
+</body>
+</html>
