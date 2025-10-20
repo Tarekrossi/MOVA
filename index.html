@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOVA — Innovación con propósito</title>
+  <link rel="icon" type="image/png" href="MOVA LOGO.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #1a1a1a;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 8%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid #eee;
+    }
+
+    header img {
+      height: 45px;
+    }
+
+    nav a {
+      margin-left: 30px;
+      text-decoration: none;
+      color: #1a1a1a;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #b49c62; /* dorado elegante */
+    }
+
+    section {
+      padding: 100px 10%;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero {
+      height: 100vh;
+      background: url('img/hero-visual.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #1a1a1a;
+      text-shadow: 0 1px 3px rgba(255,255,255,0.4);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      animation: fadeInUp 1.2s ease;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      color: #555;
+      animation: fadeInUp 1.8s ease;
+    }
+
+    .hero button {
+      margin-top: 30px;
+      background-color: #b49c62;
+      color: white;
+      border: none;
+      padding: 12px 35px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      animation: fadeInUp 2.2s ease;
+    }
+
+    .hero button:hover {
+      background-color: #a08854;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #1a1a1a;
+    }
+
+    .about img, .services img, .projects img, .process img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+    }
+
+    .services-grid, .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      margin-top: 50px;
+    }
+
+    .card {
+      background: #fafafa;
+      border-radius: 20px;
+      padding: 30px;
+      transition: all 0.4s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      background-color: #b49c62;
+      color: white;
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: underline;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    input, textarea {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    button.submit {
+      background-color: #b49c62;
+      color: white;
+      border: none;
+      padding: 12px 35px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    button.submit:hover {
+      background-color: #a08854;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="MOVA LOGO.png" alt="MOVA Logo">
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#nosotros">Sobre Nosotros</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section id="inicio" class="hero visible">
+    <h1>Innovación que inspira movimiento</h1>
+    <p>Creamos tecnología que se siente, no que se explica.</p>
+    <button onclick="document.querySelector('#nosotros').scrollIntoView({behavior:'smooth'})">Descubre MOVA</button>
+  </section>
+
+  <section id="nosotros" class="about">
+    <h2 class="section-title">Sobre Nosotros</h2>
+    <img src="img/about-team.jpg" alt="Equipo MOVA">
+    <p>MOVA combina diseño, tecnología y sostenibilidad para impulsar el cambio.  
+    Desde soluciones digitales hasta innovación ambiental, cada proyecto refleja nuestro propósito: crear impacto real con ideas que mueven el mundo.</p>
+  </section>
+
+  <section id="servicios" class="services">
+    <h2 class="section-title">Servicios</h2>
+    <div class="services-grid">
+      <div class="card">
+        <img src="img/service-web.jpg" alt="Desarrollo Web">
+        <h3>Desarrollo Web</h3>
+        <p>Diseñamos experiencias digitales limpias, rápidas y con identidad propia.</p>
+      </div>
+      <div class="card">
+        <img src="img/service-brand.jpg" alt="Identidad Visual">
+        <h3>Identidad Visual</h3>
+        <p>Creamos marcas que comunican desde la simplicidad y la elegancia.</p>
+      </div>
+      <div class="card">
+        <img src="img/service-green.jpg" alt="Innovación Sostenible">
+        <h3>Innovación Sostenible</h3>
+        <p>Fusionamos tecnología y naturaleza para un futuro más limpio.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyectos" class="projects">
+    <h2 class="section-title">Proyectos</h2>
+    <div class="projects-grid">
+      <div class="card">
+        <img src="img/project-optinova.jpg" alt="OptiNova Labs">
+        <h3>OptiNova Labs</h3>
+        <p>Desarrollo web informativo con precisión, claridad y propósito.</p>
+      </div>
+      <div class="card">
+        <img src="img/project-biogas.jpg" alt="BioGas MOVA">
+        <h3>BioGas MOVA</h3>
+        <p>Transformamos residuos en energía y abono natural para un mundo sostenible.</p>
+      </div>
+      <div class="card">
+        <img src="img/project-designlab.jpg" alt="MOVA Design Lab">
+        <h3>MOVA Design Lab</h3>
+        <p>Laboratorio creativo para explorar nuevos conceptos en diseño y UX.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="process">
+    <h2 class="section-title">Cómo trabajamos</h2>
+    <img src="img/tech-process.jpg" alt="Proceso de trabajo">
+    <p>Cada proyecto comienza con una idea clara y termina con una solución funcional.  
+    No seguimos tendencias, las creamos. Cada detalle tiene un propósito.</p>
+  </section>
+
+  <section id="contacto" class="contact">
+    <h2 class="section-title">Contacto</h2>
+    <form>
+      <input type="text" placeholder="Tu nombre" required>
+      <input type="email" placeholder="Tu correo electrónico" required>
+      <textarea placeholder="Tu mensaje" rows="5" required></textarea>
+      <button class="submit" type="submit">Enviar mensaje</button>
+    </form>
+  </section>
+
+  <footer>
+    © 2025 MOVA — Innovación con propósito.  
+  </footer>
+
+  <script>
+    // Efecto de aparición al hacer scroll
+    const sections = document.querySelectorAll("section");
+    const showOnScroll = () => {
+      const trigger = window.innerHeight * 0.85;
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < trigger) section.classList.add("visible");
+      });
+    };
+    window.addEventListener("scroll", showOnScroll);
+    showOnScroll();
+  </script>
+
+</body>
+</html>
